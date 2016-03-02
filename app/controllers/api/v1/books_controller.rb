@@ -2,7 +2,8 @@ class Api::V1::BooksController < API::V1::V1Controller
   before_action :set_book, only: [:show, :update, :destroy]
 
   def index
-    @books = Book.all
+    @author = Author.find(params[:author_id])
+    @books = @author.books
   end
 
   def show
@@ -10,7 +11,7 @@ class Api::V1::BooksController < API::V1::V1Controller
 
   def create
     unless params[:book].nil?
-      @book = Book.new(book_params)
+      @book = @author.books.new(book_params)
       begin
         @result = @book.save
       rescue Exception => e
@@ -42,6 +43,8 @@ class Api::V1::BooksController < API::V1::V1Controller
   end
 
   def book_params
-    params.require(:book).permit(:title, :description)
+    params.require(:book).permit(:title, :description, :author_id)
   end
+
+
 end
