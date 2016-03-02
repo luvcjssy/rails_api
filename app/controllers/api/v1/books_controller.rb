@@ -11,7 +11,7 @@ class Api::V1::BooksController < API::V1::V1Controller
 
   def create
     unless params[:book].nil?
-      @book = @author.books.new(book_params)
+      @book = Book.new(book_params)
       begin
         @result = @book.save
       rescue Exception => e
