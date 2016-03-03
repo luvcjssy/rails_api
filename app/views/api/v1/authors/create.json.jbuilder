@@ -11,5 +11,5 @@ unless @author.nil?
   end
 
 else
-  json.errors 'Data update is null!'
+  json.errors 'Data is null!'
 end

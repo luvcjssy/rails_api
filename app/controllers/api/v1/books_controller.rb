@@ -6,6 +6,10 @@ class Api::V1::BooksController < API::V1::V1Controller
     @books = @author.books
   end
 
+  def get_all
+    @books = Book.all
+  end
+
   def show
   end
 

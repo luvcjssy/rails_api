@@ -5,7 +5,11 @@ Rails.application.routes.draw do
         resources :books, only: [:index]
       end
 
-      resources :books, only: [:show, :create, :update, :destroy]
+      resources :books, only: [:show, :create, :update, :destroy] do
+        collection do
+          get :get_all
+        end
+      end
     end
   end
 
