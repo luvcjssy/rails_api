@@ -6,12 +6,16 @@ class Api::V1::BooksController < API::V1::V1Controller
     @books = @author.books
   end
 
+  def get_all
+    @books = Book.all
+  end
+
   def show
   end
 
   def create
     unless params[:book].nil?
-      @book = @author.books.new(book_params)
+      @book = Book.new(book_params)
       begin
         @result = @book.save
       rescue Exception => e
