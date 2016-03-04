@@ -3,30 +3,28 @@ class Api::V1::BooksController < API::V1::V1Controller
 
   def index
     @author = Author.find(params[:author_id])
-    @books = @author.books
+    @books = @author.books.published
   end
 
   def get_all
-    @books = Book.all
+    @books = Book.published
   end
 
   def show
   end
 
   def create
-    unless params[:book].nil?
-      @book = Book.new(book_params)
-      begin
-        @result = @book.save
-      rescue Exception => e
-        @error = e.message
-      end
+    @book = Book.new(book_params)
+    begin
+      @book.save
+    rescue Exception => e
+      @error = e.message
     end
   end
 
   def update
     begin
-      @result = @book.update_attributes(book_params)
+      @book.update_attributes(book_params)
     rescue Exception => e
       @error = e.message
     end
@@ -34,7 +32,7 @@ class Api::V1::BooksController < API::V1::V1Controller
 
   def destroy
     begin
-      @result = @book.destroy
+      @book.destroy
     rescue Exception => e
       @error = e.message
     end

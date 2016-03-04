@@ -1,15 +1,9 @@
-unless @book.nil?
-
-  if @error
-    json.message @error
-  else
-    if @result
-      json.message 'success'
-    else
-      json.message @book.errors.full_messages
-    end
-  end
-
+if @error
+  json.message @error
 else
-  json.message 'Data update is null!'
+  if @book.errors.blank?
+    json.message 'success'
+  else
+    json.message @book.errors.full_messages
+  end
 end
