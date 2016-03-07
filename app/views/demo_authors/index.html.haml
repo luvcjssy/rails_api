@@ -1,22 +1,22 @@
 %div(ng-controller="authorCtrl")
   %h1 Create Author
-  %form
+  = form_tag do
     .form-group
       %label Full Name
-      %input.form-control{:type => "text", "ng-model" => "author.full_name", :required => true}
+      = text_field_tag :full_name, nil, class: 'form-control', 'ng-model' => 'author.full_name', required: true
     .form-group
       %label Birthday
-      %input.form-control{:type => "text", "ng-model" => "author.birthday", :required => true}
+      = text_field_tag :birthday, nil, class: 'form-control', "ng-model" => "author.birthday", required: true
     .form-group
       %label Email
-      %input.form-control{:type => "email", "ng-model" => "author.email", :required => true}
+      = email_field_tag :email, nil, class: 'form-control', "ng-model" => "author.email", required: true
     .form-group
       %label Phone
-      %input.form-control{:type => "text", "ng-model" => "author.phone", :required => true}
+      = phone_field_tag :phone, nil, class: 'form-control', "ng-model" => "author.phone", required: true
     .form-group
       %label Active
-      %input{:type => "checkbox", "ng-model" => "author.status" }
-    %button.btn.btn-primary(ng-click="submitForm()") Submit
+      = check_box_tag :status, nil, nil, "ng-model" => "author.status"
+    = button_tag 'Submit', class: 'btn btn-primary', 'ng-click' => 'submitForm($event)'
   %h1 List Author
   %div
     %table
@@ -39,29 +39,29 @@
           %td {{ author.created_at | date }}
           %td {{ author.updated_at | date }}
           %td
-            %button.btn.btn-primary(ng-click="getListBooks(author.id)") Get Books
-            %button.btn.btn-warning(ng-click="editAuthor($index)") Edit
-            %button.btn.btn-danger(ng-click="deleteAuthor($index)") Delete
+            = button_tag 'Get Books', class: 'btn btn-primary', 'ng-click' => 'getListBooks(author.id)'
+            = button_tag 'Edit', class: 'btn btn-warning', 'ng-click' => 'editAuthor($index)'
+            = button_tag 'Delete', class: 'btn btn-danger', 'ng-click' => 'deleteAuthor($index)'
   %div
     %h1 Edit Author
-    %form
+    = form_tag do
       .form-group
         %label Full Name
-        %input.form-control{:type => "text", "ng-model" => "authorUpdate.full_name", :required => true}
+        = text_field_tag :full_name, nil, class: 'form-control', 'ng-model' => 'authorUpdate.full_name', required: true
       .form-group
         %label Birthday
-        %input.form-control{:type => "text", "ng-model" => "authorUpdate.birthday", :required => true}
+        = text_field_tag :birthday, nil, class: 'form-control', "ng-model" => "authorUpdate.birthday", required: true
       .form-group
         %label Email
-        %input.form-control{:type => "email", "ng-model" => "authorUpdate.email", :required => true}
+        = email_field_tag :email, nil, class: 'form-control', "ng-model" => "authorUpdate.email", required: true
       .form-group
         %label Phone
-        %input.form-control{:type => "text", "ng-model" => "authorUpdate.phone", :required => true}
+        = phone_field_tag :phone, nil, class: 'form-control', "ng-model" => "authorUpdate.phone", required: true
       .form-group
         %label Active
-        %input{:type => "checkbox", "ng-model" => "authorUpdate.status" }
-      %button.btn.btn-primary(ng-click="updateForm2()") Submit
-      %button.btn.btn-danger(ng-click="cancelForm()") Cancel
+        = check_box_tag :status, nil, nil, "ng-model" => "authorUpdate.status"
+      = button_tag 'Submit', class: 'btn btn-primary', 'ng-click' => 'updateForm2($event)'
+      = button_tag 'Cancel', class: 'btn btn-danger', 'ng-click' => 'cancelForm()'
   %div
     %h1 List Books of Author
     %p(ng-show="!books.length") No Books

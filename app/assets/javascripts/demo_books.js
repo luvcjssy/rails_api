@@ -27,7 +27,8 @@ app.controller('booksCtrl', function($scope, $http){
 
   // Create new book
   $scope.book = {};
-  $scope.submitForm = function() {
+  $scope.submitForm = function($event) {
+    $event.preventDefault();
     $http({
       method: 'POST',
       url: base_url + 'api/v1/books',
@@ -61,7 +62,8 @@ app.controller('booksCtrl', function($scope, $http){
     $scope.bookUpdate = {};
   };
 
-  $scope.updateBook = function(){
+  $scope.updateBook = function($event){
+    $event.preventDefault();
     $http.put(base_url + "api/v1/books/" + $scope.bookUpdate.id, {'book' : $scope.bookUpdate})
         .success(function(book){
           if(book.published != true){

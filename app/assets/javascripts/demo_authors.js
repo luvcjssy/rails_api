@@ -16,7 +16,8 @@ app.controller('authorCtrl', function($scope, $http){
 
   // Create new author
   $scope.author = {};
-  $scope.submitForm = function() {
+  $scope.submitForm = function($event) {
+    $event.preventDefault();
     $http({
       method  : 'POST',
       url     : base_url + 'api/v1/authors',
@@ -52,7 +53,8 @@ app.controller('authorCtrl', function($scope, $http){
     $scope.authorUpdate = {};
   };
 
-  $scope.updateForm2 = function(){
+  $scope.updateForm2 = function($event){
+    $event.preventDefault();
     $http.put(base_url + "api/v1/authors/" + $scope.authorUpdate.id, {'author' : $scope.authorUpdate})
         .success(function(author){
           if(author.status != true){
