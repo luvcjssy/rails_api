@@ -26,8 +26,8 @@ app.controller('authorCtrl', function($scope, $http){
       if (author) {
         if(author.status == true) {
           $scope.authors.push(author);
-          $scope.author = {};
         }
+        $scope.author = {};
       }
     }).error(function(Exception){});
   };
@@ -42,16 +42,14 @@ app.controller('authorCtrl', function($scope, $http){
   };
 
   // Update author
-  $scope.show = false;
   var idx;
   $scope.editAuthor = function(index){
     $scope.authorUpdate = $scope.authors[index];
     idx = index;
-    $scope.show = !$scope.show;
   };
 
   $scope.cancelForm = function() {
-    $scope.show = !$scope.show;
+    $scope.authorUpdate = {};
   };
 
   $scope.updateForm2 = function(){
@@ -61,7 +59,6 @@ app.controller('authorCtrl', function($scope, $http){
             $scope.authors.splice(idx, 1);
           }
           $scope.authorUpdate = {};
-          $scope.show = !$scope.show;
         });
   };
 });
