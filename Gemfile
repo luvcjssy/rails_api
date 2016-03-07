@@ -47,3 +47,5 @@ end
 
 gem 'rack-cors', :require => 'rack/cors'
 gem 'validates_timeliness', '~> 4.0'
+gem 'bootstrap-sass', '~> 3.3'
+gem 'haml', '~> 4.0'
