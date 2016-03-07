@@ -1,4 +1,5 @@
 class Author < ActiveRecord::Base
+
   has_many :books, dependent: :destroy
 
   validates :full_name, presence: {:message => "khong duoc bo trong"},
@@ -14,5 +15,7 @@ class Author < ActiveRecord::Base
                     length: {within: 6..20, :too_short => "ngan qua", :too_long => "qua dai"},
                     :numericality => {:message => "khong phai so"}
 
-  scope :status, -> { where(status: 1) }
+  scope :status, -> { where(status: true) }
+
+
 end

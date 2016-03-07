@@ -45,7 +45,7 @@ class Api::V1::BooksController < API::V1::V1Controller
   end
 
   def book_params
-    params.require(:book).permit(:title, :description, :author_id)
+    params.require(:book).permit(:title, :description, :author_id, :published)
   end
 
 

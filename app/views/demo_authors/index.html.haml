@@ -1,0 +1,77 @@
+%div(ng-controller="authorCtrl")
+  %h1 Create Author
+  %form
+    .form-group
+      %label Full Name
+      %input.form-control{:type => "text", "ng-model" => "author.full_name", :required => true}
+    .form-group
+      %label Birthday
+      %input.form-control{:type => "text", "ng-model" => "author.birthday", :required => true}
+    .form-group
+      %label Email
+      %input.form-control{:type => "email", "ng-model" => "author.email", :required => true}
+    .form-group
+      %label Phone
+      %input.form-control{:type => "text", "ng-model" => "author.phone", :required => true}
+    .form-group
+      %label Active
+      %input{:type => "checkbox", "ng-model" => "author.status" }
+    %button.btn.btn-primary(ng-click="submitForm()") Submit
+  %h1 List Author
+  %div
+    %table
+      %thead
+        %th ID
+        %th Full Name
+        %th Birthday
+        %th Email
+        %th Phone
+        %th Created At
+        %th Updated At
+        %th
+      %tbody
+        %tr(ng-repeat="author in authors")
+          %td {{ author.id }}
+          %td {{ author.full_name }}
+          %td {{ author.birthday }}
+          %td {{ author.email }}
+          %td {{ author.phone }}
+          %td {{ author.created_at | date }}
+          %td {{ author.updated_at | date }}
+          %td
+            %button.btn.btn-primary(ng-click="getListBooks(author.id)") Get Books
+            %button.btn.btn-warning(ng-click="editAuthor($index)") Edit
+            %button.btn.btn-danger(ng-click="deleteAuthor($index)") Delete
+  %div(ng-show="show")
+    %h1 Edit Author
+    %form
+      .form-group
+        %label Full Name
+        %input.form-control{:type => "text", "ng-model" => "authorUpdate.full_name", :required => true}
+      .form-group
+        %label Birthday
+        %input.form-control{:type => "text", "ng-model" => "authorUpdate.birthday", :required => true}
+      .form-group
+        %label Email
+        %input.form-control{:type => "email", "ng-model" => "authorUpdate.email", :required => true}
+      .form-group
+        %label Phone
+        %input.form-control{:type => "text", "ng-model" => "authorUpdate.phone", :required => true}
+      .form-group
+        %label Active
+        %input{:type => "checkbox", "ng-model" => "authorUpdate.status" }
+      %button.btn.btn-primary(ng-click="updateForm2()") Submit
+      %button.btn.btn-danger(ng-click="cancelForm()") Cancel
+  %div
+    %h1 List Books of Author
+    %p(ng-show="!books.length") No Books
+    %table(ng-show="books.length")
+      %thead
+        %th ID
+        %th Title
+        %th Description
+      %tbody
+        %tr(ng-repeat="book in books")
+          %td {{ book.id }}
+          %th {{ book.title }}
+          %th {{ book.description }}

@@ -13,4 +13,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :demo_authors, only: [:index]
+
+  root 'demo_authors#index'
+
 end
