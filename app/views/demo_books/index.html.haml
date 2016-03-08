@@ -1,0 +1,81 @@
+.div(ng-controller="booksCtrl")
+  %h1 Create New Book
+  = form_tag do
+    .form-group
+      %label Title
+      = text_field_tag :title, nil, class: 'form-control', 'ng-model' => 'book.title', required: true
+    .form-group
+      %label Description
+      = text_area_tag :description, nil, class: 'form-control', "ng-model" => 'book.description', required: true, :cols => 30, :rows => 10
+    .form-group
+      %label Author
+      %select{'ng-model' => 'book.author_id'}
+        %option(ng-repeat="author in authors" value="{{author.id}}") {{ author.full_name }}
+    .form-group
+      %label Published
+      = check_box_tag :published, nil, nil, "ng-model" => "book.published"
+    = button_tag 'Submit', class: 'btn btn-primary', 'ng-click' => 'submitForm($event)'
+
+  %h1 List All Books
+  %div
+    %table
+      %thead
+        %th ID
+        %th Title
+        %th Description
+        %th Author
+        %th Created At
+        %th Updated At
+        %th
+      %tbody
+        %tr(ng-repeat="book in books")
+          %td {{ book.id }}
+          %td {{ book.title }}
+          %td {{ book.description }}
+          %td {{ book.author.full_name }}
+          %td {{ book.created_at | date }}
+          %td {{ book.updated_at | date }}
+          %td
+            = button_tag 'Get other books', class: 'btn btn-primary', 'ng-click' => 'getOtherBooks(book.author.id)'
+            = button_tag 'Edit', class: 'btn btn-warning', 'ng-click' => 'editBook($index)'
+            = button_tag 'Delete', class: 'btn btn-danger', 'ng-click' => 'deleteBook($index)'
+  %div
+    %h1 Edit Book
+    = form_tag do
+      .form-group
+        %label Title
+        = text_field_tag :title, nil, class: 'form-control', 'ng-model' => 'bookUpdate.title', required: true
+      .form-group
+        %label Description
+        = text_area_tag :description, nil, class: 'form-control', "ng-model" => 'bookUpdate.description', required: true, :cols => 30, :rows => 10
+      .form-group
+        %label Author
+        %select{'ng-model' => 'bookUpdate.author_id'}
+          %option(ng-repeat="author in authors" value="{{author.id}}") {{ author.full_name }}
+      .form-group
+        %label Published
+        = check_box_tag :published, nil, nil, "ng-model" => "bookUpdate.published"
+      = button_tag 'Submit', class: 'btn btn-primary', 'ng-click' => 'updateBook($event)'
+      = button_tag 'Cancel', class: 'btn btn-danger', 'ng-click' => "cancelForm()"
+  %div
+    %h1 List Other Book
+    %p(ng-show="!otherBooks.length") No Books
+    %div(ng-show="otherBooks.length")
+      %table
+        %p Author: {{ otherBooks[0].author.full_name }}
+        %p Birthday: {{ otherBooks[0].author.birthday | date }}
+        %p Email: {{ otherBooks[0].author.email }}
+        %p Phone: {{ otherBooks[0].author.phone }}
+        %thead
+          %th ID
+          %th Title
+          %th Description
+          %th Created At
+          %th Updated At
+        %tbody
+          %tr(ng-repeat="otherBook in otherBooks")
+            %td {{ otherBook.id }}
+            %td {{ otherBook.title }}
+            %td {{ otherBook.description }}
+            %td {{ otherBook.created_at | date }}
+            %td {{ otherBook.updated_at | date }}

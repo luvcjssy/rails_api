@@ -1,0 +1,77 @@
+%div(ng-controller="authorCtrl")
+  %h1 Create Author
+  = form_tag do
+    .form-group
+      %label Full Name
+      = text_field_tag :full_name, nil, class: 'form-control', 'ng-model' => 'author.full_name', required: true
+    .form-group
+      %label Birthday
+      = text_field_tag :birthday, nil, class: 'form-control', "ng-model" => "author.birthday", required: true
+    .form-group
+      %label Email
+      = email_field_tag :email, nil, class: 'form-control', "ng-model" => "author.email", required: true
+    .form-group
+      %label Phone
+      = phone_field_tag :phone, nil, class: 'form-control', "ng-model" => "author.phone", required: true
+    .form-group
+      %label Active
+      = check_box_tag :status, nil, nil, "ng-model" => "author.status"
+    = button_tag 'Submit', class: 'btn btn-primary', 'ng-click' => 'submitForm($event)'
+  %h1 List Author
+  %div
+    %table
+      %thead
+        %th ID
+        %th Full Name
+        %th Birthday
+        %th Email
+        %th Phone
+        %th Created At
+        %th Updated At
+        %th
+      %tbody
+        %tr(ng-repeat="author in authors")
+          %td {{ author.id }}
+          %td {{ author.full_name }}
+          %td {{ author.birthday }}
+          %td {{ author.email }}
+          %td {{ author.phone }}
+          %td {{ author.created_at | date }}
+          %td {{ author.updated_at | date }}
+          %td
+            = button_tag 'Get Books', class: 'btn btn-primary', 'ng-click' => 'getListBooks(author.id)'
+            = button_tag 'Edit', class: 'btn btn-warning', 'ng-click' => 'editAuthor($index)'
+            = button_tag 'Delete', class: 'btn btn-danger', 'ng-click' => 'deleteAuthor($index)'
+  %div
+    %h1 Edit Author
+    = form_tag do
+      .form-group
+        %label Full Name
+        = text_field_tag :full_name, nil, class: 'form-control', 'ng-model' => 'authorUpdate.full_name', required: true
+      .form-group
+        %label Birthday
+        = text_field_tag :birthday, nil, class: 'form-control', "ng-model" => "authorUpdate.birthday", required: true
+      .form-group
+        %label Email
+        = email_field_tag :email, nil, class: 'form-control', "ng-model" => "authorUpdate.email", required: true
+      .form-group
+        %label Phone
+        = phone_field_tag :phone, nil, class: 'form-control', "ng-model" => "authorUpdate.phone", required: true
+      .form-group
+        %label Active
+        = check_box_tag :status, nil, nil, "ng-model" => "authorUpdate.status"
+      = button_tag 'Submit', class: 'btn btn-primary', 'ng-click' => 'updateForm2($event)'
+      = button_tag 'Cancel', class: 'btn btn-danger', 'ng-click' => 'cancelForm()'
+  %div
+    %h1 List Books of Author
+    %p(ng-show="!books.length") No Books
+    %table(ng-show="books.length")
+      %thead
+        %th ID
+        %th Title
+        %th Description
+      %tbody
+        %tr(ng-repeat="book in books")
+          %td {{ book.id }}
+          %th {{ book.title }}
+          %th {{ book.description }}

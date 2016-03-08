@@ -40,6 +40,6 @@ class Api::V1::AuthorsController < API::V1::V1Controller
   end
 
   def author_params
-    params.require(:author).permit(:full_name, :birthday, :email, :phone)
+    params.require(:author).permit(:full_name, :birthday, :email, :phone, :status)
   end
 end
