@@ -4,6 +4,6 @@ class Book < ActiveRecord::Base
   validates :title, presence: {:message => "khong duoc bo trong"}
   validates :description, presence: {:message => "khong duoc bo trong"}
 
-  scope :published, -> { where(:published => 1) }
+  scope :published, -> { where(:published => true) }
 
 end
