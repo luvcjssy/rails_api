@@ -2,7 +2,7 @@ class Api::V1::AuthorsController < API::V1::V1Controller
   before_action :set_author, only: [:show, :update, :destroy]
 
   def index
-    @authors = Author.status
+    @authors = Author.active
   end
 
   def show

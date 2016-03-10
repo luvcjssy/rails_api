@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'demo_books/index'
 
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
@@ -8,9 +7,7 @@ Rails.application.routes.draw do
       end
 
       resources :books, only: [:show, :create, :update, :destroy] do
-        collection do
-          get :get_all
-        end
+          get :get_all, on: :collection
       end
     end
   end
